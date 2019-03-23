@@ -21,5 +21,22 @@ function [corners, imgInit] = locationInit(imgInit)
     %an empty arena, the majority of feutures are located in the arena corners 
     C = C.selectStrongest(10);
     %Use K-means to identify the corners 
-    [idx, corners] = kmeans(C.Location,4);
+    [idx, cs] = kmeans(C.Location,4);
+        %UpperLeft corner in arena
+        
+    [uL,idx] = min(cs(:,1)+cs(:,2));
+    upperLeft = cs(idx(1),:);
+    cs(idx(1),:) = [];
+    %LowerRight corner in arena
+    [lR,idx] = max(cs(:,1)+cs(:,2));
+    lowerRight = cs(idx(1),:);
+    cs(idx(1),:) = [];
+    %UpperRight corner in arena
+    [uR, idx] = min(cs(:,2));
+    upperRight = cs(idx(1),:);
+    %LowerLeft corner in arena
+    [lL, idx] = min(cs(:,1));
+    lowerLeft = cs(idx(1),:);
+    
+    corners = [upperLeft; lowerRight; upperRight; lowerLeft];
 end

@@ -33,23 +33,10 @@ function [loc, centroid] = location(corners,imgInit,imgLoc)
     regiondata = regionprops(cc,'Centroid');
     centroid = [regiondata.Centroid];
     
-    %UpperLeft corner in arena
-    cs = corners;
-    [upperLeft,idx] = min(cs);
-    cs(idx(1),:) = [];
-    %LowerRight corner in arena
-    [lowerRight,idx] = max(cs);
-    cs(idx(1),:) = [];
-    %UpperRight corner in arena
-    [uR, idx] = min(cs(:,2));
-    upperRight = cs(idx(1));
-    %LowerLeft corner in arena
-    [lL, idx] = min(cs(:,1));
-    lowerLeft = cs(idx(1));
     %Output difference between corners and centroid
-    loc = [upperLeft - centroid;
-           lowerLeft - centroid;
-           upperRight - centroid;
-           lowerRight - centroid];    
+    loc = [corners(1) - centroid;
+           corners(2) - centroid;
+           corners(3) - centroid;
+           corners(4) - centroid];    
 end
 
