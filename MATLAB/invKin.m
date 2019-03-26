@@ -30,5 +30,23 @@ if x>=0
 else
     theta_1=(pi)+temp;
 end
+
+%% find theta_2, 3
+d = sqrt(x^2 + y^2);
+l = sqrt(d^2 + z^2);
+
+if z >= 0
+    theta_3 = acos((l^2-l1^2-l2^2)/(2*l1*l2));
+    alpha=atan(z/d);
+    beta= acos((l1^2+l^2-l2^2)/(2*l1*l));
+    theta_2 = alpha+beta;
+    
+else%TODO
+    theta_2 = 0;
+    theta_3 = 0;
+end
+%% output values
+
+arm_angles = [theta_1 theta_2 theta_3];
 end
 
