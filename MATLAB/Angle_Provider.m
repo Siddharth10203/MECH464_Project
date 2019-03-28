@@ -9,12 +9,12 @@
 
 function Position = Angle_Provider(A)
     %   Initialize Arduino Object
-    port = 'COM5';  % Initialize COM Port
+    port = 'COM3';  % Initialize COM Port
     board = 'Uno';  % model of your arduino board
     arduino_board = arduino(port, board, 'Libraries', 'Servo');
     
     % Initialize Servo Objects
-    servo_motor_1 = servo(arduino_board, 'D8');
+    servo_motor_1 = servo(arduino_board, 'D6');
     servo_motor_2 = servo(arduino_board, 'D9');
     servo_motor_3 = servo(arduino_board, 'D10');
     claw = servo(arduino_board, 'D11');
