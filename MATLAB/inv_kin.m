@@ -5,8 +5,10 @@ function [arm_angles] = inv_kin(r, theta, z)
 % theta
 % z
 
-L_1=80; %mm
-L_2=80; %mm
+L_link=80; %mm
+
+%% offset values
+r=r-45-16;
 
 %% find theta_1
 theta_1 = theta;
@@ -14,9 +16,9 @@ theta_1 = theta;
 %% find theta_2, 3
 L = sqrt(r^2 + z^2);
 
-temp_angle = acos((L^2-L_1^2-L_2^2)/(2*L_1*L_2));
+temp_angle = acos((L^2-2*L_link)/(2*L_link^2));
 alpha = atan2(z,r);
-beta = acos((L_1^2 + L^2 - L_2^2)/(2*L_1*L));
+beta = acos(L/(2*L_link));
 theta_2 = alpha + beta;
 theta_3 = temp_angle  -theta_2;
 %% output values
