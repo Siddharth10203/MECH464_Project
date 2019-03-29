@@ -13,10 +13,13 @@ function [] = path_plan(port)
 %   s3: elbow
 %   s4: claw
 
+%% Joint limits:
+% s3 must be greater than 0.5
+
 % Desired position (will pass to arm later as part of function)
-p1 = 0.3;
-p2 = 0.4;
-p3 = 0.9;
+p1 = 0.5;
+p2 = 0.7;
+p3 = 0.8;
 
 % Drop position
 d1 = 0.85;
@@ -42,10 +45,11 @@ s3 = servo(arduino_board, 'D10');
 s4 = servo(arduino_board, 'D11');
 
 % Move to desired location and pick up object
+writePosition(s4, 0.25);
 writePosition(s1, p1);
+pause(dt);
 writePosition(s2, p2);
 writePosition(s3, p3);
-writePosition(s4, 0.25);
 pause(dt);
 writePosition(s4, 1);
 pause(dt);
