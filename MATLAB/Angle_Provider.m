@@ -9,7 +9,7 @@
 
 function Position = Angle_Provider(A)
     %   Initialize Arduino Object
-    port = 'COM3';  % Initialize COM Port
+    port = 'COM5';  % Initialize COM Port
     board = 'Uno';  % model of your arduino board
     arduino_board = arduino(port, board, 'Libraries', 'Servo');
     

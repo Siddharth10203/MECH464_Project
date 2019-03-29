@@ -19,12 +19,12 @@ if xyz_d > max_distance_real
     disp('coordinates outside workspace');
     return
 end
-%% find theta_1
+%% find theta_1 (base angle)
 temp = atan(y/x);
 
-if x>=0
+if x >= 0
     theta_1=temp;
-    if y<0
+    if y < 0
        theta_1=(2*pi)+temp; 
     end
 else
@@ -37,8 +37,8 @@ l = sqrt(d^2 + z^2);
 
 if z >= 0
     theta_3 = acos((l^2-l1^2-l2^2)/(2*l1*l2));
-    alpha=atan(z/d);
-    beta= acos((l1^2+l^2-l2^2)/(2*l1*l));
+    alpha = atan(z/d);
+    beta = acos((l1^2+l^2-l2^2)/(2*l1*l));
     theta_2 = alpha+beta;
     
 else%TODO
