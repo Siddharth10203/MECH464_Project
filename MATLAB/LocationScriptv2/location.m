@@ -2,7 +2,7 @@
 %  Localizes object in the arena by using the corners found with
 %  locationInit(). It outputs the location (x,y) of the object wrt to the 
 %  upper left corner of the arena.
-function [loc, corloc, pivot, centroid] = location(corners, offset, imgInit,imgLoc)
+function [loc, corloc, pivot, centroid, imgLoc] = location(corners, offset, imgInit,imgLoc)
     %Check if the a priori image exist (FOR DEBUGGING), else capture picture
     %using external USB Camera (requires MATLAB USB Camera Package!!!)
     if ~exist('imgLoc','var')

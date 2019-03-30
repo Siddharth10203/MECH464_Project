@@ -20,7 +20,7 @@ function [corners, imgInit] = locationInit(imgInit)
     C = detectHarrisFeatures(I);
     %Filters the features based on their metrics. It is expected that with 
     %an empty arena, the majority of feutures are located in the arena corners 
-    C = C.selectStrongest(20);
+    C = C.selectStrongest(5);
     %Use K-means to identify the corners 
     [idx, cs] = kmeans(C.Location,4);
         %UpperLeft corner in arena
