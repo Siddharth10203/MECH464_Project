@@ -7,7 +7,7 @@
 %   Reference: https://www.allaboutcircuits.com/projects/...
 %               servo-control-with-arduino-through-matlab/
 
-function Position = Angle_Provider(A)
+function Position = angle_provider(A)
     %   Initialize Arduino Object
     port = 'COM5';  % Initialize COM Port
     board = 'Uno';  % model of your arduino board

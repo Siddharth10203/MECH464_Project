@@ -1,5 +1,5 @@
-function [] = path_plan(A)
-%path_plan() Simply connects to the arduino and executes a path.
+function [] = kin_tester(A)
+%kin_tester() Simply connects to the arduino and executes a path.
 %   Steps:
 %        1 Connect to arduino at port and initialize servos
 %        2 Move to desired position and pause
@@ -24,27 +24,28 @@ p1 = (A(1)/pi);
 p2 = 1-(A(2)/pi);
 p3 = 1-(A(3)/pi);
 
-% Drop position
-d1 = 0.85;
-d2 = 0.6;
-d3 = 1;
-
 % Home position
 h1 = 0.75;
 h2 = 0.4;
 h3 = 0.9;
 
 % Pause time
-dt = 2;
+dt = 3;
 
 % Initialize Arduino Object
 board = 'Uno';  % model of your arduino board
-arduino_board = arduino('COM5' , board, 'Libraries', 'Servo');
+arduino_board = arduino('COM3' , board, 'Libraries', 'Servo');
 
 s1 = servo(arduino_board, 'D6');
 s2 = servo(arduino_board, 'D9');
 s3 = servo(arduino_board, 'D10');
 s4 = servo(arduino_board, 'D11');
+
+% Move home
+writePosition(s1, h1);
+writePosition(s2, h2);
+writePosition(s3, h3);
+pause(dt);
 
 % Move to desired location and pick up object
 writePosition(s4, open);
@@ -54,20 +55,6 @@ writePosition(s2, p2);
 writePosition(s3, p3);
 pause(dt);
 writePosition(s4, close);
-pause(dt);
-
-% Move to drop point and drop
-writePosition(s1, d1);
-writePosition(s2, d2);
-writePosition(s3, d3);
-pause(dt);
-writePosition(s4, open);
-pause(dt);
-
-% Move home
-writePosition(s1, h1);
-writePosition(s2, h2);
-writePosition(s3, h3);
 pause(dt);
 
 fclose( serial(arduino_board.Port) );

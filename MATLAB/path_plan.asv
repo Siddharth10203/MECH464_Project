@@ -1,4 +1,4 @@
-function [] = path_plan(port)
+function [] = path_plan(A)
 %path_plan() Simply connects to the arduino and executes a path.
 %   Steps:
 %        1 Connect to arduino at port and initialize servos
@@ -13,56 +13,64 @@ function [] = path_plan(port)
 %   s3: elbow
 %   s4: claw
 
+%% Joint limits:
+% s2 must be greater than 0.4
+% s3 must be greater than 0.5
+open = 0.3
+close = 1
+
 % Desired position (will pass to arm later as part of function)
-p1 = 0.1;
-p2 = 0.5;
-p3 = 0.5;
+p1 = (A(1)/pi);
+p2 = 1-(A(2)/pi);
+p3 = 1-(A(3)/pi);
+
+% Drop position
+d1 = 0.85;
+d2 = 0.6;
+d3 = 1;
+
+% Home position
+h1 = 0.75;
+h2 = 0.4;
+h3 = 0.9;
+h4 = 0.25;
 
 % Pause time
 dt = 2;
 
 % Initialize Arduino Object
 board = 'Uno';  % model of your arduino board
-arduino_board = arduino(port, board, 'Libraries', 'Servo');
+arduino_board = arduino('COM5' , board, 'Libraries', 'Servo');
 
 s1 = servo(arduino_board, 'D6');
 s2 = servo(arduino_board, 'D9');
 s3 = servo(arduino_board, 'D10');
 s4 = servo(arduino_board, 'D11');
 
-% Move to desired location
-writePosition(s1, p1);
-writePosition(s2, p2);
-writePosition(s3, p3);
+% Move to desired location and pick up object
 writePosition(s4, 0.25);
-pause(dt);
-
-% Pick up the object
 writePosition(s1, p1);
+pause(dt);
 writePosition(s2, p2);
 writePosition(s3, p3);
+pause(dt);
 writePosition(s4, 1);
 pause(dt);
 
-% Move to drop point
-writePosition(s1, 0.8);
-writePosition(s2, 0.4);
-writePosition(s3, 0.6);
+% Move to drop point and drop
+writePosition(s1, d1);
+writePosition(s2, d2);
+writePosition(s3, d3);
 writePosition(s4, 1);
 pause(dt);
-
-% Drop the object
-writePosition(s1, 0.8);
-writePosition(s2, 0.4);
-writePosition(s3, 0.6);
 writePosition(s4, 0.25);
 pause(dt);
 
 % Move home
-writePosition(s1, 0.5);
-writePosition(s2, 0.5);
-writePosition(s3, 0.5);
-writePosition(s4, 0.25);
+writePosition(s1, h1);
+writePosition(s2, h2);
+writePosition(s3, h3);
+writePosition(s4, h4);
 pause(dt);
 
 fclose( serial(arduino_board.Port) );
