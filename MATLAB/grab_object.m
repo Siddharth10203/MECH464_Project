@@ -2,7 +2,8 @@
 
 %% Get the location of object
 Ax = imread('Ax.png');
-[loc,corloc, pivot, centroid, B] = location(corners, offset, Ax);
+[corners, Ax] = locationInit(Ax);
+[loc,corloc, pivot, centroid, B] = location(corners, 60, Ax);
 r = corloc(1);
 theta = corloc(2);
 z = -20; % object height (mm)

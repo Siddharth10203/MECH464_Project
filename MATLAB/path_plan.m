@@ -44,7 +44,7 @@ dt = 2;
 
 % Initialize Arduino Object
 board = 'Uno';  % model of your arduino board
-arduino_board = arduino('COM3' , board, 'Libraries', 'Servo');
+arduino_board = arduino('COM5' , board, 'Libraries', 'Servo');
 
 s1 = servo(arduino_board, 'D6');
 s2 = servo(arduino_board, 'D9');
