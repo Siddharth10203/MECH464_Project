@@ -3,8 +3,8 @@
 %% Get the location of object
 Ax = imread('Ax.png');
 [loc,corloc, pivot, centroid, B] = location(corners, offset, Ax);
-r = corloc(1);
-theta = corloc(2);
+r = double(corloc(1));
+theta = double(corloc(2));
 z = -20; % object height (mm)
 
 %% Inverse Kinematics
