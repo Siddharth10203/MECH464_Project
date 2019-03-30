@@ -40,7 +40,7 @@ h2 = 0.4;
 h3 = 0.9;
 
 % Pause time
-dt = 2;
+dt = 0.5;
 
 % Initialize Arduino Object
 board = 'Uno';  % model of your arduino board
