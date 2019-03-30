@@ -1,7 +1,8 @@
 %%% Top Level Script %%%
 
 %% Get the location of object
-[loc,corloc, pivot, centroid, B] = location(corners, offset, A);
+Ax = imread('Ax.png');
+[loc,corloc, pivot, centroid, B] = location(corners, offset, Ax);
 r = corloc(1);
 theta = corloc(2);
 z = -20; % object height (mm)
