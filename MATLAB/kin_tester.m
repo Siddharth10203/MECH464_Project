@@ -19,22 +19,27 @@ function [] = kin_tester(A)
 open = 0.3;
 close = 1;
 
+% Correction Factors (for robot joint compliance)
+bias_1 = 0.023;
+bias_2 = -0.1;
+bias_3 = -0.125;
+
 % Desired position (will pass to arm later as part of function)
-p1 = (A(1)/pi);
-p2 = 1-(A(2)/pi);
-p3 = 1-(A(3)/pi);
+p1 = (A(1)/pi + bias_1);
+p2 = (1-(A(2)/pi) + bias_2);
+p3 = (1-(A(3)/pi) + bias_3);
 
 % Home position
-h1 = 0.75;
+h1 = 0.9;
 h2 = 0.4;
 h3 = 0.9;
 
 % Pause time
-dt = 3;
+dt = 2;
 
 % Initialize Arduino Object
 board = 'Uno';  % model of your arduino board
-arduino_board = arduino('COM3' , board, 'Libraries', 'Servo');
+arduino_board = arduino('COM5' , board, 'Libraries', 'Servo');
 
 s1 = servo(arduino_board, 'D6');
 s2 = servo(arduino_board, 'D9');

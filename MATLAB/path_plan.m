@@ -19,10 +19,15 @@ function [] = path_plan(A)
 open = 0.3;
 close = 1;
 
+% Correction Factors (for excessive robot joint compliance)
+bias_1 = 0.023;
+bias_2 = -0.1;
+bias_3 = -0.125;
+
 % Desired position (will pass to arm later as part of function)
-p1 = (A(1)/pi);
-p2 = 1-(A(2)/pi);
-p3 = 1-(A(3)/pi);
+p1 = (A(1)/pi + bias_1);
+p2 = 1-(A(2)/pi) + bias_2;
+p3 = 1-(A(3)/pi) + bias_3;
 
 % Drop position
 d1 = 0.85;
