@@ -29,6 +29,18 @@ p1 = (A(1)/pi + bias_1);
 p2 = 1-(A(2)/pi) + bias_2;
 p3 = 1-(A(3)/pi) + bias_3;
 
+if p2 <= 0
+    p2 = 0.01;
+elseif p2 >= 1
+    p2 = 0.99;
+end    
+
+if p3 <= 0
+    p3 = 0.01;
+elseif p3 >= 1
+    p3 = 0.99;
+end
+    
 % Drop position
 d1 = 0.85;
 d2 = 0.6;

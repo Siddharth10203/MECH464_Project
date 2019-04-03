@@ -1,7 +1,7 @@
 %%% Top Level Script %%%
 
 %% Get the location of object
-Ax = imread('Ax.png');
+Ax = imread('Ay.png');
 [corners, Ax] = locationInit(Ax);
 [loc,corloc, pivot, centroid, B] = location(corners, 60, Ax);
 r = double(corloc(1));
